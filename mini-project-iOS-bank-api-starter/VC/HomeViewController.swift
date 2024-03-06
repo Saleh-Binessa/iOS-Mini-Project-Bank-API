@@ -10,86 +10,92 @@ import Foundation
 import UIKit
 import SnapKit
 import Kingfisher
+import Eureka
+import Alamofire
 
 class HomeViewController: UIViewController {
         // Property to hold the bank account details passed from the previous view
         var user: User?
 
         // UI Components
-        private let logInButton = UIButton()
-        private let signUpButton = UIButton()
+    @objc private let signUpButton = UIButton()
+        private let signInButton = UIButton()
+
         
-        let petImageView = UIImageView()
+        let profileImageView = UIImageView()
         let url = URL(string: "https://example.com/image.png")
         
 
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            setupViews()
-            setupLayout()
-            configureWithPet()
-        }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white // Set a background color
+        
+        
+        let appearance = UINavigationBarAppearance()
+        title = "Home"
+        appearance.configureWithDefaultBackground()
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        setupViews()
+        setupLayout()
+        setupUI()
+        
+
+        // Add target action for the button
+        signInButton.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
+        
+        
+        // Add target action for the button
+        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+        
+        
+        view.backgroundColor = .white
+    }
 
         private func setupViews() {
-            view.backgroundColor = .white
-
-            signUpButton..addTarget(self, action: #selector(navigateButtonTapped), for: .touchUpInside)
-            
-            petAgeLabel.font = .systemFont(ofSize: 16, weight: .medium)
-            petGenderLabel.font = .systemFont(ofSize: 16, weight: .medium)
-            adoptionStatusLabel.font = .systemFont(ofSize: 16, weight: .medium)
-            petImageView.kf.setImage(with: URL(string: pet?.image ?? "image"))
-
-
-            // Add the views to the hierarchy
             view.addSubview(signUpButton)
-            view.addSubview(logInButton)
-            view.addSubview(petImageView)
+            view.addSubview(signInButton)
         }
 
         private func setupLayout() {
-            petImageView.snp.makeConstraints { make in
-                make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
-                make.centerX.equalToSuperview()
-                make.width.height.equalTo(100)  // Example size, adjust as needed
+            signUpButton.snp.makeConstraints { make in
+                make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20) // Adjust bottom spacing as needed
+                make.leading.equalToSuperview().offset(0) // Adjust leading spacing as needed
+                make.width.height.equalTo(100) // Example size, adjust as needed
             }
 
-            petNameLabel.snp.makeConstraints { make in
-                make.top.equalTo(petImageView.snp.bottom).offset(20)
-                make.centerX.equalToSuperview()
+            signInButton.snp.makeConstraints { make in
+                make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20) // Adjust bottom spacing as needed
+                make.trailing.equalToSuperview().offset(-20) // Adjust trailing spacing as needed
+                make.width.height.equalTo(100) // Example size, adjust as needed
             }
 
-            petAgeLabel.snp.makeConstraints { make in
-                make.top.equalTo(petNameLabel.snp.bottom).offset(20)
-                make.centerX.equalToSuperview()
             }
-            petGenderLabel.snp.makeConstraints { make in
-                make.top.equalTo(petAgeLabel.snp.bottom).offset(20)
-                make.centerX.equalToSuperview()
+   private func setupUI() {
+       signUpButton.setTitle("Sign Up", for: .normal)
+       signUpButton.backgroundColor = .systemBlue
+       signUpButton.layer.cornerRadius = 40
+        
+        signInButton.setTitle("Sign In", for: .normal)
+        signInButton.backgroundColor = .systemBlue
+        signInButton.layer.cornerRadius = 40
+            
+            
+//            profileImageView.snp.makeConstraints { make in
+//                make.top.equalTo(profileImageView.snp.bottom).offset(20)
+//                make.centerX.equalToSuperview()
+//            }
             }
-            adoptionStatusLabel.snp.makeConstraints { make in
-                make.top.equalTo(petGenderLabel.snp.bottom).offset(20)
-                make.centerX.equalToSuperview()
-            }
-        }
-
-        private func configureWithPet() {
-            petNameLabel.text = "Pet Name: \(pet?.name ?? "name")"
-            petAgeLabel.text = "Age: \(pet?.age ?? 0)"
-            petGenderLabel.text = "Gender: \(pet?.gender ?? "gender")"
-            petAgeLabel.text = "Adoption Status: \(pet?.adopted ?? true)"
-          petImageView.image = UIImage(named: pet?.image ?? "image")
-        }
     
     @objc func signUpButtonTapped() {
-        let secondVC = SignUpViewController()
-        secondVC.recivedemployeeImage = imageTextField.text
-        secondVC.recivedfullName = fullNameTextField.text
-        secondVC.recivedEmail = emailTextField.text
-        secondVC.recivedIban = ibanTextField.text
-        secondVC.recivedPhoneNumber = phoneNumberTextField.text
-        secondVC.recivedEmployeeSalary = employeeSalaryTextField.text
-        self.navigationController?.pushViewController(secondVC, animated: true)
+        let signUpVC = SignUpViewController()
+        self.navigationController?.pushViewController(signUpVC, animated: true)
+    }
+    
+    @objc func signInButtonTapped() {
+        let signInVC = SignInViewController()
+        signInVC.modalPresentationStyle = .fullScreen 
+        self.navigationController?.pushViewController(signInVC, animated: true)
     }
     }
 

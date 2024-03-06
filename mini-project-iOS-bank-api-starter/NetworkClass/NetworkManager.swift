@@ -9,11 +9,25 @@ import Foundation
 import Alamofire
 
 class NetworkManager {
-    private let baseUrl = "https://coded-bank-api.eapi.joincoded.com/"
+    
+     let baseUrl = "https://coded-bank-api.eapi.joincoded.com/"
     
     static let shared = NetworkManager()
     
-    private func signup(user: User, completion: @escaping (Result<TokenResponse, Error>) -> Void) {
+    func fetchUsers(completion: @escaping ([User]?) -> Void) {
+        
+        AF.request(baseUrl).responseDecodable(of: [User].self) {response in
+            switch response.result {
+            case .success(let user):
+                completion(user)
+            case .failure(let error):
+                completion(nil)
+                print(error)
+            }
+        }
+    }
+    
+     func signup(user: User, completion: @escaping (Result<TokenResponse, Error>) -> Void) {
         let url = baseUrl + "signup"
         AF.request(url, method: .post, parameters: user, encoder: JSONParameterEncoder.default).responseDecodable(of: TokenResponse.self) { response in
             switch response.result {
