@@ -6,7 +6,8 @@
 //
 
 import Foundation
-import alamofire
+import Alamofire
+
 class NetworkManager {
     private let baseUrl = "https://coded-bank-api.eapi.joincoded.com/"
     

@@ -1,17 +1,13 @@
 //
-//  SignUpViewController.swift
+//  WalletViewController.swift
 //  mini-project-iOS-bank-api-starter
 //
 //  Created by Saleh Bin Essa on 06/03/2024.
 //
 
-import Foundation
-import Eureka
 import UIKit
-import Alamofire
-import Kingfisher
 
-class SignUpViewController: FormViewController {
+class WalletTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
