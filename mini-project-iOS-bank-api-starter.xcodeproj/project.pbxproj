@@ -19,7 +19,6 @@
 		05CF04E12B97A23C00672FDF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CF04E02B97A23C00672FDF /* User.swift */; };
 		2ABEAAD22B983D7200D68BF6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABEAAD12B983D7200D68BF6 /* HomeViewController.swift */; };
 		2ABEAAD62B983FA700D68BF6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABEAAD52B983FA700D68BF6 /* ProfileViewController.swift */; };
-		2ABEAAD82B983FEA00D68BF6 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABEAAD72B983FEA00D68BF6 /* WalletViewController.swift */; };
 		2ABEAADB2B9840AD00D68BF6 /* Eureka in Frameworks */ = {isa = PBXBuildFile; productRef = 2ABEAADA2B9840AD00D68BF6 /* Eureka */; };
 		2ABEAADE2B9840BD00D68BF6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2ABEAADD2B9840BD00D68BF6 /* SnapKit */; };
 		2ABEAAE02B9840BD00D68BF6 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 2ABEAADF2B9840BD00D68BF6 /* SnapKit-Dynamic */; };
@@ -28,6 +27,7 @@
 		2ABEAAE82B98410800D68BF6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2ABEAAE72B98410800D68BF6 /* Kingfisher */; };
 		2ABEAAEA2B98420300D68BF6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABEAAE92B98420300D68BF6 /* SignUpViewController.swift */; };
 		2ABEAAEC2B9842CB00D68BF6 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABEAAEB2B9842CB00D68BF6 /* SignInViewController.swift */; };
+		2ABEAAF02B99A30700D68BF6 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABEAAEF2B99A30700D68BF6 /* TransactionsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,9 +45,9 @@
 		05CF04E02B97A23C00672FDF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2ABEAAD12B983D7200D68BF6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		2ABEAAD52B983FA700D68BF6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		2ABEAAD72B983FEA00D68BF6 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		2ABEAAE92B98420300D68BF6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		2ABEAAEB2B9842CB00D68BF6 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		2ABEAAEF2B99A30700D68BF6 /* TransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,9 +139,9 @@
 			children = (
 				2ABEAAD12B983D7200D68BF6 /* HomeViewController.swift */,
 				2ABEAAD52B983FA700D68BF6 /* ProfileViewController.swift */,
-				2ABEAAD72B983FEA00D68BF6 /* WalletViewController.swift */,
 				2ABEAAE92B98420300D68BF6 /* SignUpViewController.swift */,
 				2ABEAAEB2B9842CB00D68BF6 /* SignInViewController.swift */,
+				2ABEAAEF2B99A30700D68BF6 /* TransactionsViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -235,11 +235,11 @@
 				05CF04D82B97A15200672FDF /* NetworkManager.swift in Sources */,
 				05CF04C02B97A0AF00672FDF /* AppDelegate.swift in Sources */,
 				05CF04E12B97A23C00672FDF /* User.swift in Sources */,
-				2ABEAAD82B983FEA00D68BF6 /* WalletViewController.swift in Sources */,
 				2ABEAAEA2B98420300D68BF6 /* SignUpViewController.swift in Sources */,
 				05CF04DF2B97A22A00672FDF /* AmountChange.swift in Sources */,
 				2ABEAAD62B983FA700D68BF6 /* ProfileViewController.swift in Sources */,
 				2ABEAAEC2B9842CB00D68BF6 /* SignInViewController.swift in Sources */,
+				2ABEAAF02B99A30700D68BF6 /* TransactionsViewController.swift in Sources */,
 				2ABEAAD22B983D7200D68BF6 /* HomeViewController.swift in Sources */,
 				05CF04DB2B97A1FA00672FDF /* TokenResponse.swift in Sources */,
 				05CF04C22B97A0AF00672FDF /* SceneDelegate.swift in Sources */,
