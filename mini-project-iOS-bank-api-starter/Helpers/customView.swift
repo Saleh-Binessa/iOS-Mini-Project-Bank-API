@@ -7,17 +7,14 @@
 
 import Foundation
 import UIKit
-
-// MARK: ONLY UNCOMMENT THE FOLLOWING AFTER INSTALLING THE LIBRARY
-/// * Eureka
-/// * SnapKit
-
 import Eureka
 import SnapKit
+import Kingfisher
 
 class CustomImageView: UIView {
     
     private let imageView = UIImageView()
+    
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,6 +27,9 @@ class CustomImageView: UIView {
     
     private func setupImageView() {
         // Add imageView to the view hierarchy
+        let imageView = UIImageView()
+        let url = URL(string: "https://example.com/image.png")
+        imageView.kf.setImage(with: url)
         addSubview(imageView)
         
         // Setup imageView constraints using SnapKit

@@ -21,11 +21,6 @@ class HomeViewController: UIViewController {
     @objc private let signUpButton = UIButton()
         private let signInButton = UIButton()
 
-        
-        let profileImageView = UIImageView()
-        let url = URL(string: "https://example.com/image.png")
-        
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white // Set a background color

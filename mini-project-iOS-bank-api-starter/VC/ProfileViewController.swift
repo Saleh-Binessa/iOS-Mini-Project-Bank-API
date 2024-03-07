@@ -1,79 +1,113 @@
-//
-//  ProfileViewController.swift
-//  mini-project-iOS-bank-api-starter
-//
-//  Created by Saleh Bin Essa on 06/03/2024.
-//
-
 import UIKit
+import SnapKit
+import Kingfisher
 
 class ProfileViewController: UIViewController {
-
+    var token: String?
     var user: User?
-    
-    var recivedUserName: String?
-    var recivedPassword: String?
-    var recivedEmail: String?
-    
-    let generateContainer = UIView()
-    let usernameLabel = UILabel()
-    let passwordLabel = UILabel()
-    let emailLabel = UILabel()
-    
-    
+
+    // UI Components
+    private let usernameLabel = UILabel()
+    private let emailLabel = UILabel()
+    private let balanceLabel = UILabel()
+    private let toTransactions = UIButton()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
-        
-        let appearance = UINavigationBarAppearance()
-       
-        title = "Profile"
-        appearance.configureWithDefaultBackground()
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-    
-        setUpUI()
+        view.backgroundColor = .white // Set a background color
+
+        setupViews()
+        setupLayout()
+        setupUI()
+        fetchProfile()
     }
-    func setUpUI(){
-        view.addSubview(generateContainer)
-        generateContainer.addSubview(usernameLabel)
-        generateContainer.addSubview(passwordLabel)
-        generateContainer.addSubview(emailLabel)
-        
-//        userUIImageView.snp.makeConstraints { make in
-//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-//            make.leading.trailing.equalToSuperview().offset(0)
-//        }
-        
-        generateContainer.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.height.width.equalTo(50).offset(200)
-        }
+
+    private func setupViews() {
+        usernameLabel.font = .systemFont(ofSize: 16, weight: .medium)
+        balanceLabel.font = .systemFont(ofSize: 16, weight: .medium)
+
+        // Add the views to the hierarchy
+        view.addSubview(usernameLabel)
+        view.addSubview(emailLabel)
+        view.addSubview(balanceLabel)
+        view.addSubview(toTransactions)
+
+        // Configure toTransactions button
+        toTransactions.addTarget(self, action: #selector(toTransactionsButtonTapped), for: .touchUpInside)
+    }
+
+    private func setupLayout() {
         usernameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-        }
-        passwordLabel.snp.makeConstraints { make in
-            make.top.equalTo(passwordLabel.snp.bottom)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.centerX.equalToSuperview()
         }
 
-          emailLabel.snp.makeConstraints { make in
-              make.top.equalTo(emailLabel.snp.bottom)
+        emailLabel.snp.makeConstraints { make in
+            make.top.equalTo(usernameLabel.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+        }
+        
+        balanceLabel.snp.makeConstraints { make in
+            make.top.equalTo(emailLabel.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
         }
 
-        
-//        employeeUIImageView.image = UIImage(named: recivedemployeeImage ?? "")
-        generateContainer.backgroundColor = .gray
-        generateContainer.layer.cornerRadius = 10
-        usernameLabel.text = "Name: \(recivedUserName ?? "" )"
-        passwordLabel.text = "Phone: \(recivedPassword ?? "" )"
-        emailLabel.text = "Email: \(recivedEmail ?? "" )"
-        
-        usernameLabel.textColor = .white
-        passwordLabel.textColor = .white
-        emailLabel.textColor = .white
+        toTransactions.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20) // Adjust bottom spacing as needed
+            make.centerX.equalToSuperview() // Center the button horizontally
+            make.width.equalTo(200) // Example width, adjust as needed
+            make.height.equalTo(50) // Example height, adjust as needed
+        }
+    }
 
+    private func setupUI() {
+        if let user = user.self {
+            usernameLabel.text = "Username: \(user.username ?? "username")"
+            balanceLabel.text = "Balance: \(String(describing: user.balance ?? 0))"
+            emailLabel.text = "Email: \(user.email ?? "email")"
+
+        }
+
+        toTransactions.setTitle("Transactions", for: .normal)
+        toTransactions.backgroundColor = .systemBlue
+        toTransactions.layer.cornerRadius = 25 // Adjusted for a more standard button height
+    }
+
+    @objc func toTransactionsButtonTapped() {
+        let transactionsVC = TransactionsViewController()
+        self.navigationController?.pushViewController(transactionsVC, animated: true)
+    }
+    
+    func fetchProfile() {
         
-        usernameLabel.font = .boldSystemFont(ofSize: 17)
-        passwordLabel.font = .boldSystemFont(ofSize: 17)
-        emailLabel.font = .boldSystemFont(ofSize: 17)
+        
+        NetworkManager.shared.account(token: "account") { response in
+            
+            
+            // Handling Network Request
+            DispatchQueue.main.async {
+                
+                switch response {
+                    
+                case .success(let user):
+                    print(user.username)
+                    print(user.email)
+                    print(user.balance)
+                    
+
+//                    let profileViewController = ProfileViewController()
+//                    profileViewController.token = tokenResponse.token
+//                    self.navigationController?.pushViewController(profileViewController, animated: true)
+                    
+                    self.usernameLabel.text = user.username
+                    self.emailLabel.text = user.email
+                    self.balanceLabel.text = String(user.balance ?? 0.0)
+
+                    
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 }
